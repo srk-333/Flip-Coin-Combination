@@ -4,7 +4,7 @@ echo "Welcome to Flip Coin Combination Problem"
 
 Limit=100;
 
-###Triplet Coin Flip
+#Triplet Coin Flip
 
 hhh=0;
 hht=0;
@@ -64,7 +64,43 @@ while [ $tp -lt $Limit ]
 
    echo ${triplet[@]}
 
-###Doublet Coin Flip
+#soring Triplet Coin Flip in ascending order
+
+VALUES=()
+count=0;
+
+for DATA in "${triplet[@]}"
+  do
+           VALUES+=("${DATA##*:}")
+            let count++
+  done
+
+for (( i=0;i<count;i++ ))
+ do
+        arr[i]=${VALUES[i]}
+ done
+
+size=${#arr[@]}
+
+function sortArray() {
+            for (( i=0;i<size;i++ )) {
+                   for ((j=i+1;j<size;j++ )) {
+                         if [ ${arr[i]} -gt ${arr[j]} ]
+                             then
+                                     temp=${arr[i]}
+                                     arr[i]=${arr[j]}
+                                     arr[j]=$temp
+                         fi
+                    }
+               }
+           echo ${arr[@]}
+}
+
+sortArray ${arr[@]}
+
+echo "Winning Combination of Triplet is " ${arr[5]}
+
+#Doublet Coin Flip
 
 hh=0;
 ht=0;
@@ -106,6 +142,42 @@ done
 
    echo ${doublet[@]}
 
+#sorting Doublet in ascending order
+
+VALUES=()
+count=0;
+
+for DATA in "${doublet[@]}"
+  do
+           VALUES+=("${DATA##*:}")
+            let count++
+  done
+
+for (( i=0;i<count;i++ ))
+ do
+        db[i]=${VALUES[i]}
+ done
+
+size=${#db[@]}
+
+function sortArray() {
+            for (( i=0;i<size;i++ )) {
+                   for ((j=i+1;j<size;j++ )) {
+                         if [ ${db[i]} -gt ${db[j]} ]
+                             then
+                                     temp=${db[i]}
+                                     db[i]=${db[j]}
+                                     db[j]=$temp
+                         fi
+                    }
+               }
+           echo ${db[@]}
+}
+
+sortArray ${db[@]}
+
+echo "Winning Combination of Doublet is " ${db[3]}
+
 ### Singlet Coin Flip
 
 head=1;
@@ -137,3 +209,39 @@ while [ $sg -lt $Limit ]
   singlet[t]=$tailPercentage
 
    echo ${singlet[@]}
+
+#Sorting Singlet in Ascending order
+
+VALUES=()
+count=0;
+
+for DATA in "${singlet[@]}"
+  do
+           VALUES+=("${DATA##*:}")
+            let count++
+  done
+
+for (( i=0;i<count;i++ ))
+ do
+        sarr[i]=${VALUES[i]}
+ done
+
+size=${#sarr[@]}
+
+function sortArray() {
+            for (( i=0;i<size;i++ )) {
+                   for ((j=i+1;j<size;j++ )) {
+                         if [ ${sarr[i]} -gt ${sarr[j]} ]
+                             then
+                                     temp=${sarr[i]}
+                                     sarr[i]=${sarr[j]}
+                                     sarr[j]=$temp
+                         fi
+                    }
+               }
+           echo ${sarr[@]}
+}
+
+sortArray ${sarr[@]}
+
+echo "Winning Combination of Singlet is " ${sarr[1]}
