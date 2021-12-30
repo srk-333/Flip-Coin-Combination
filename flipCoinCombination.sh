@@ -5,10 +5,12 @@ echo "Welcome to Flip Coin Combination Problem"
 Head=1;
 Limit=100;
 
-hh=0;
-ht=0;
-th=0;
-tt=0;
+hhh=0;
+hht=0;
+hth=0;
+ttt=0;
+tth=0;
+tht=0;
 flag=0;
 
 declare -A result
@@ -17,36 +19,53 @@ while [ $flag -lt $Limit ]
  do
          flip1=$(( RANDOM%2 ));
          flip2=$(( RANDOM%2 ));
+         flip3=$(( RANDOM%2 ));
 
-        if [ $flip1 -eq 1 ] && [ $flip2 -eq 1 ]
+        if [ $flip1 -eq 1 ] && [ $flip2 -eq 1 ] && [ $flip3 -eq 1 ]
            then
-                   let hh++
-           elif [ $flip1 -eq 1 ] && [ $flip2 -eq 0 ]
+                   let hhh++
+
+           elif [ $flip1 -eq 1 ] && [ $flip2 -eq 1 ] && [ $flip3 -eq 0 ]
            then
-                  let ht++
-           elif [ $flip1 -eq 0 ] && [ $flip2 -eq 1 ]
+                  let hht++
+
+           elif [ $flip1 -eq 1 ] && [ $flip2 -eq 0 ] && [ $flip3 -eq 1 ]
            then
-                  let th++
+                  let hth++
+
+             elif [ $flip1 -eq 0 ] && [ $flip2 -eq 0 ] && [ $flip3 -eq 0 ]
+           then
+                  let ttt++
+
+           elif [ $flip1 -eq 0 ] && [ $flip2 -eq 0 ] && [ $flip3 -eq 1 ]
+           then
+                  let tth++
+
            else 
-                  let tt++
+                  let tht++
        fi
        let flag++
  done
 
-   hhPercentage=`echo $hh $Limit | awk '{hh=$1/$2*100} {print hh}'`
-   htPercentage=`echo $ht $Limit | awk '{ht=$1/$2*100} {print ht}'`
-   thPercentage=`echo $th $Limit | awk '{th=$1/$2*100} {print th}'`
-   ttPercentage=`echo $tt $Limit | awk '{tt=$1/$2*100} {print tt}'`
+   hhhPercentage=`echo $hhh $Limit | awk '{hhh=$1/$2*100} {print hhh}'`
+   hhtPercentage=`echo $hht $Limit | awk '{hht=$1/$2*100} {print hht}'`
+   hthPercentage=`echo $hth $Limit | awk '{hth=$1/$2*100} {print hth}'`
+   tttPercentage=`echo $ttt $Limit | awk '{ttt=$1/$2*100} {print ttt}'`
+   tthPercentage=`echo $tth $Limit | awk '{tth=$1/$2*100} {print tth}'`
+   thtPercentage=`echo $tht $Limit | awk '{tht=$1/$2*100} {print tht}'`
 
-  result[hh]=$hhPercentage
-  result[ht]=$htPercentage
-  result[th]=$thPercentage
-  result[tt]=$ttPercentage
+  result[hhh]=$hhhPercentage
+  result[hht]=$hhtPercentage
+  result[hth]=$hthPercentage
+  result[ttt]=$tttPercentage
+  result[tth]=$tthPercentage
+  result[tht]=$thtPercentage
 
    echo ${result[@]}
 
-echo "Combination of HH is $hhPercentage%"
-echo "Combination of HT is  $htPercentage%"
-echo "Combination of TH is $thPercentage%"
-echo "Combination of TT is  $ttPercentage%"
-   
+echo "Combination of HHH is $hhhPercentage%"
+echo "Combination of HHT is  $hhtPercentage%"
+echo "Combination of HTH is $hthPercentage%"
+echo "Combination of TTT is  $tttPercentage%"
+echo "Combination of TTH is  $tthPercentage%"
+echo "Combination of THT is  $thtPercentage%"   
