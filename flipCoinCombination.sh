@@ -2,12 +2,37 @@
 
 echo "Welcome to Flip Coin Combination Problem"
 
-coinFlip=$(( RANDOM%2 ));
 Head=1;
+Limit=150;
 
- if [[ $coinFlip -eq $Head ]]
-    then
-        echo "It's Head"
-    else
-        echo "It's Tail"
- fi
+hCount=0;
+tCount=0;
+totalCount=0;
+
+declare -A result
+
+while [ $totalCount -lt $Limit ]
+ do
+         coinFlip=$(( RANDOM%2 ));
+
+        if [[ $coinFlip -eq $Head ]]
+           then
+                   let hCount++
+           else
+                  let tCount++
+       fi
+       let totalCount++
+ done
+
+   headPercentage=`echo $hCount $Limit | awk '{h=$1/$2*100} {print h}'`
+
+   tailPercentage=`echo $tCount $Limit | awk '{t=$1/$2*100} {print t}'`
+
+  result[h]=#headPercentage
+  result[t]=$tailPercentage
+
+   echo ${result[@]}
+
+echo "Head percentage $headPercentage%"
+echo "Tail percentage $tailPercentage%"
+   
